@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kpiquestion;
 use App\Models\Kpireq;
-use App\Models\Kpiscore;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +15,7 @@ class FillkpiController extends Controller
         $idk = Kpireq::where("id_role", $idr)
                      ->where("id_vocation", $idu)
                      ->get();
-        $data =  Kpiscore::where("id_kpi", $idk)->get();
-        return view("layout/kpi-fill",['data' => $data]);
+        $data =  Kpiquestion::where("id_kpi", $idk)->get();
+        return view("layout/rekap-kinerja",['data' => $data]);
     }
 }

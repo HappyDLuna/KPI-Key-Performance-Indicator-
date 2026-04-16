@@ -25,9 +25,4 @@ class HomeController extends Controller
     {
         return view('layout/dashboard-kpi');
     }
-
-    public function tendik()
-    {
-        return view('layout/dashboard-tendik');
-    }
 }
