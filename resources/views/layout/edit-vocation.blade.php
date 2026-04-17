@@ -22,9 +22,9 @@
                         </span>
                         @enderror
                     </div>
-                    <button type="submit" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Tambah</button>
-                    <a class="btn btn-danger" href="{{route('tabel-jabatan')}}"><i class="fa fa-ban" aria-hidden="true"></i>
-                        Batal Tambah</a>
+                    <button type="submit" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Ubah</button>
+                    <a class="btn btn-danger" href="{{route('tabel-jurusan')}}"><i class="fa fa-ban" aria-hidden="true"></i>
+                        Batal Ubah</a>
                 </form>
             </div>
         </div>

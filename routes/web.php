@@ -70,7 +70,7 @@ Route::middleware(['auth','user-access:mahasiswa'])->group(function(){
 Route::middleware(['auth','user-access:tendik'])->group(function(){
     Route::get('/tendik/rekap',[FillkpiController::class,'index'])->name('rekap');
     Route::get('/tendik/laporan',[FillkpiController::class,'laporan'])->name('laporan');
-    Route::get('/tendik/jawabkpi',[FillkpiController::class,'isikpi'])->name('answer-kpi');
+    Route::get('/tendik/jawabkpi/{id}',[FillkpiController::class,'isikpi'])->name('answer-kpi');
     Route::get('/tendik/delete-answer',[FillkpiController::class,'delete'])->name('delete-answer');
     
 });

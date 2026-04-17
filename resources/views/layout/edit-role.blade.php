@@ -32,9 +32,9 @@
                             <option value="4" @if ($data['type']== 4) selected @endif>Kaprodi</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Tambah</button>
+                    <button type="submit" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Ubah</button>
                     <a class="btn btn-danger" href="{{route('tabel-jabatan')}}"><i class="fa fa-ban" aria-hidden="true"></i>
-                        Batal Tambah</a>
+                        Batal Ubah</a>
                 </form>
             </div>
         </div>

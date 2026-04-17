@@ -19,28 +19,24 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                          <th>Pertanyaan KPI</th>
-                          <th>Keterangan</th>
+                          <th>Kumpulan KPI</th>
                           <th>Aksi</th>  
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
-                          <th>Pertanyaan KPI</th>
-                          <th>Keterangan</th>
+                          <th>Kumpulan KPI</th>
                           <th>Aksi</th> 
                         </tr>
                     </tfoot>
                     <tbody>
                         @foreach ($data as $d)
                         <tr>
-                            <td>{{$data['kpi']}}</td>
-                            <td>{{$data['keterangan']}}</td>
-                            <form action="{{ route('delete-datakpi',$d['id']) }}">
-                                <a class="btn-btn primary" href="#">Isi KPI</a>
-                                <a class="btn-btn success" href="#">Edit</a>
-                                <button type="submit">Hapus</button>
-                            </form>
+                            <td>{{$d['name']}}</td>
+                            <td>
+                                <a class="btn btn-primary" href="{{ route('answer-kpi',$d['id']) }}">Isi KPI</a>
+                                <a class="btn btn-success" href="#">Edit</a>
+                            </td>
                         </tr>
                         @endforeach  
                     </tbody>

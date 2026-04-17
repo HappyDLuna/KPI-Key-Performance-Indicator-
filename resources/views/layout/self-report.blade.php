@@ -29,7 +29,7 @@
                     <tfoot>
                         <tr>
                             <th>No</th>
-                            <th>Nama Jurusan</th>
+                            <th>Nama KPI</th>
                             <th>Aksi</th>
                         </tr>
                     </tfoot>
