@@ -19,7 +19,7 @@ class KpiscoreController extends Controller
      */
     public function index($id)
     {
-            $data = Kpiscore::where('id_kpi',$id)->get();
+            $question = Kpiscore::where('id_kpi',$id)->get();
             return view('layout.tables-detailkpi',['data' => $data,'id' => $id]);
     }
 

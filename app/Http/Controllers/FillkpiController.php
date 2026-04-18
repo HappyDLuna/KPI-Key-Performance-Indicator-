@@ -4,11 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Kpiquestion;
 use App\Models\Kpireq;
+use App\Models\Kpiscore;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class FillkpiController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(){
         $idr = Auth::user()->id_role;
         $idu = Auth::user()->id_vocation;
@@ -16,15 +24,51 @@ class FillkpiController extends Controller
                      ->where("id_vocation", $idu)
                      ->get();
         // $data =  Kpiquestion::where("id_kpi", $idk)->get();
-        return view("layout/rekap-kinerja",['data' => $idk]);
+        return view("layout.rekap-kinerja",['data' => $idk]);
     }
 
     public function isikpi($id){
         $data =  Kpiquestion::where("id_kpi", $id)->get();
-        return view("layout/kpi-fill",['data' => $data]);
+        return view("layout.kpi-fill",['data' => $data]);
     }
 
-    public function store($id, Request $request){
+    public function store(Request $request){
+        $rules = array(
+            'nilaikpi' => 'required',
+            'nilaikpi' => 'max:100'
+        );
+
+        $messages = array(
+            'nilaikpi.required' => 'Nilai Kpi harus Di isi',
+            'nilaikpi.max' => 'Nilai Kpi tidak bisa melebihi 100'
+        );
+
+        $validator = Validator::make($request->all(),$rules,$messages);
+        if($validator->fails()){
+            return redirect('/tendik/jawabkpi/'.$request->idkpireq)
+            ->withErrors($validator);
+        }
+        for ($x = 0; $x < count($request->idkpi); $x++){
+            Kpiscore::create([
+            'id_kpiquestion' => $request->idkpi[$x],
+            'id_user' => Auth::user()->id,
+            'skor' => $request->nilaikpi[$x],
+            'keterangan' => '-',
+            'status' => 0
+        ]);
+        }
+        
+
+        return redirect('/tendik/rekap')->with('alert','Penambahan Jawaban KPI berhasil');
+    }
+
+     public function editkpi($id){
+        $data =  Kpiquestion::where("id_kpi", $id)->get();
+        $adata = Kpiscore::where('id_kpiquestion',$data->$id)->where('status',0)->get();
+        return view("layout.kpi-edit",['data' => $data]);
+    }
+
+    public function update($id, Request $request){
         $rules = array(
             'nilaikpi' => 'required',
             'nilaikpi' => 'max:100'
@@ -41,11 +85,13 @@ class FillkpiController extends Controller
             ->withErrors($validator);
         }
 
-        Kpireq::updateOrCreate([
+        Kpiscore::updateOrCreate([
+        'id' => $id],
+        [
             'id_kpiquestion' => $id,
             'id_user' => Auth::user()->id,
             'skor' => $request->nilaikpi,
-            'keterangan' => 'nihil',
+            'keterangan' => '-',
             'status' => 'Belom Dikonfirmasi'
         ]);
 

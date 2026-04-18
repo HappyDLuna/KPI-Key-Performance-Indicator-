@@ -16,8 +16,8 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <form action="{{ route('masuk-kpi') }}" method="post">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <form action="" method="post">
                                 @csrf
                                 @method('post')
                         <thead>
@@ -31,25 +31,22 @@
                             <tr>
                                 <th>No</th>
                                 <th>Kebutuhan KPI</th>
-                                <th></th>
+                                <th><button type="submit" class="btn btn-primary">Isi KPI</buuton></th>
                             </tr>
                         </tfoot>
                         <tbody>
                             @foreach ($data as $d)
                             <tr>
-                                <input type="text" name="idkpireq" value="{{ $d->id_kpi }}" hidden>
-                                <input type="text" name="idkpi[]" value="{{ $d->id }}" hidden>
                                 <td>{{$loop->iteration}}</td>
-                                <td>{{$d->kpi}}</td>
+                                <td>{{$d['kpi']}}</td>
                                 <td>
-                                    <input type="text" name="nilaikpi[]" class="form-control">
+                                    <input type="text" name="nilaikpi" class="form-control">
                                 </td>
                             </tr>
                             @endforeach
+                            </form>
                         </tbody>
                     </table>
-                    <button type="submit">Isi Kpi</button>
-                </form>
                 </div>
             </div>
         </div>
