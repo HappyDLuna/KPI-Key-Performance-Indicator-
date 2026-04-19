@@ -72,6 +72,8 @@ Route::middleware(['auth','user-access:tendik'])->group(function(){
     Route::get('/tendik/laporan',[FillkpiController::class,'laporan'])->name('laporan');
     Route::get('/tendik/jawabkpi/{id}',[FillkpiController::class,'isikpi'])->name('answer-kpi');
     Route::post('/tendik/simpankpi',[FillkpiController::class,'store'])->name('masuk-kpi');
+    Route::get('/tendik/ubahkpi/{id}',[FillkpiController::class,'editkpi'])->name('ubah-kpi');
+    Route::put('/tendik/updatekpi',[FillkpiController::class,'update'])->name('update-kpi');
     Route::get('/tendik/delete-answer',[FillkpiController::class,'delete'])->name('delete-answer');
     
 });

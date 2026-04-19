@@ -17,4 +17,8 @@ class Kpiquestion extends Model
     public function kpireqs(){
         return $this->belongsTo(Kpireq::class, 'id_kpi');
     }
+
+    public function kpiscore(){
+        return $this->hasMany(Kpiscore::class, 'id_kpiquestion');
+    }
 }

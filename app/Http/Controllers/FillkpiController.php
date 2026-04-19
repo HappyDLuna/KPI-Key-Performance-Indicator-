@@ -28,7 +28,9 @@ class FillkpiController extends Controller
     }
 
     public function isikpi($id){
-        $data =  Kpiquestion::where("id_kpi", $id)->get();
+        $data =  Kpiquestion::whereDoesntHave('kpiscore', function ($query){
+            $query->where("id_user", Auth::user()->id);
+        })->where('id_kpi',$id)->get();
         return view("layout.kpi-fill",['data' => $data]);
     }
 
@@ -63,12 +65,11 @@ class FillkpiController extends Controller
     }
 
      public function editkpi($id){
-        $data =  Kpiquestion::where("id_kpi", $id)->get();
-        $adata = Kpiscore::where('id_kpiquestion',$data->$id)->where('status',0)->get();
+        $data =  Kpiscore::with('kpiquestion')->where('id_user',Auth::user()->id)->where('status',0)->get();
         return view("layout.kpi-edit",['data' => $data]);
     }
 
-    public function update($id, Request $request){
+    public function update(Request $request){
         $rules = array(
             'nilaikpi' => 'required',
             'nilaikpi' => 'max:100'
@@ -85,16 +86,14 @@ class FillkpiController extends Controller
             ->withErrors($validator);
         }
 
-        Kpiscore::updateOrCreate([
-        'id' => $id],
-        [
-            'id_kpiquestion' => $id,
-            'id_user' => Auth::user()->id,
-            'skor' => $request->nilaikpi,
-            'keterangan' => '-',
-            'status' => 'Belom Dikonfirmasi'
+        for ($x = 0; $x < count($request->id); $x++){
+            Kpiscore::updateOrCreate([
+            'id' => $request->id[$x]],
+            [
+            'skor' => $request->nilaikpi[$x],
         ]);
+        }
 
-        return redirect('/kpi/tabel-kpi')->with('alert','Penambahan KPI berhasil');
+        return redirect('/tendik/rekap')->with('alert','Pengubahan Jawaban KPI berhasil');
     }
 }

@@ -18,8 +18,9 @@ class kpiscore extends Model
     ];
 
     protected $table = 'kpiscore';
+    protected $primarykey = 'id';
 
-     public function kpiscores(){
+     public function kpiquestion(){
         return $this->belongsTo(Kpiquestion::class, 'id_kpiquestion');
     }
 }

@@ -32,10 +32,10 @@
                     <tbody>
                         @foreach ($data as $d)
                         <tr>
-                            <td>{{$d['name']}}</td>
+                            <td>{{$d->name}}</td>
                             <td>
-                                <a class="btn btn-primary" href="{{ route('answer-kpi',$d['id']) }}">Isi KPI</a>
-                                <a class="btn btn-success" href="#">Edit</a>
+                                <a class="btn btn-primary" href="{{ route('answer-kpi',$d->id) }}">Isi KPI</a>
+                                <a class="btn btn-success" href="{{ route('ubah-kpi',$d->id) }}">Edit</a>
                             </td>
                         </tr>
                         @endforeach  

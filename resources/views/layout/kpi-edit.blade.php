@@ -16,10 +16,10 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <form action="" method="post">
+                    <form action="{{ route('update-kpi') }}" method="post">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 @csrf
-                                @method('post')
+                                @method('put')
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -31,22 +31,25 @@
                             <tr>
                                 <th>No</th>
                                 <th>Kebutuhan KPI</th>
-                                <th><button type="submit" class="btn btn-primary">Isi KPI</buuton></th>
+                                <th></th>
                             </tr>
                         </tfoot>
                         <tbody>
                             @foreach ($data as $d)
                             <tr>
+                                <input type="text" name="idkpireq" value="{{ $d->kpiquestion->id_kpi }}" hidden>
+                                <input type="text" name="id[]" value="{{ $d->id }}" hidden>
                                 <td>{{$loop->iteration}}</td>
-                                <td>{{$d['kpi']}}</td>
+                                <td>{{$d->kpiquestion->kpi}}</td>
                                 <td>
-                                    <input type="text" name="nilaikpi" class="form-control">
+                                    <input type="text" name="nilaikpi[]" class="form-control" value="{{ $d->skor }}">
                                 </td>
                             </tr>
                             @endforeach
-                            </form>
                         </tbody>
                     </table>
+                    <button type="submit" class="btn btn-primary">Isi KPI</button>
+                </form>
                 </div>
             </div>
         </div>
