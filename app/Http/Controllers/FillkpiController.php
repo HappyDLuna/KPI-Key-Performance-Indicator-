@@ -25,6 +25,16 @@ class FillkpiController extends Controller
                      ->get();
         // $data =  Kpiquestion::where("id_kpi", $idk)->get();
         return view("layout.rekap-kinerja",['data' => $idk]);
+        }
+        
+        public function laporan(){
+            $idr = Auth::user()->id_role;
+            $idu = Auth::user()->id_vocation;
+            $idk = Kpireq::where("id_role", $idr)
+            ->where("id_vocation", $idu)
+            ->get();
+            // $data =  Kpiquestion::where("id_kpi", $idk)->get();
+            return view("layout.laporan-tendik",['data' => $idk]);
     }
 
     public function isikpi($id){

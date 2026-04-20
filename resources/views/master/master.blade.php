@@ -119,7 +119,7 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Isi Tabel :</h6>
                             <a class="collapse-item" href="{{ route('rekap') }}">Rekap Kinerja</a>
-                            <a class="collapse-item" href="#">Laporan</a>
+                            <a class="collapse-item" href="{{ route('laporan') }}">Laporan</a>
                         </div>
                     </div>
                 </li>
