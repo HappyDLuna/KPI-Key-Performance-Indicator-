@@ -44,6 +44,11 @@ class FillkpiController extends Controller
         return view("layout.kpi-fill",['data' => $data]);
     }
 
+    public function laporan_kpi($id){
+        $data =  Kpiscore::with('kpiquestion')->where('id_user',Auth::user()->id)->get();
+        return view("layout.laporan-kpi",['data' => $data]);
+    }
+
     public function store(Request $request){
         $rules = array(
             'nilaikpi' => 'required',

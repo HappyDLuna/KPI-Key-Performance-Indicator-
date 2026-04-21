@@ -34,7 +34,7 @@
                         <tr>
                             <td>{{$d->name}}</td>
                             <td>
-                                <a class="btn btn-primary" href="">Lihat Status Jawaban</a>
+                                <a class="btn btn-primary" href="{{ route('laporan-kpi',$d->id) }}">Lihat Status Jawaban</a>
                             </td>
                         </tr>
                         @endforeach  
