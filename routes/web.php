@@ -80,7 +80,7 @@ Route::middleware(['auth','user-access:tendik'])->group(function(){
 });
 
 Route::middleware(['auth','user-access:rektor'])->group(function(){
-    
+    Route::get('/rektor/verifikasi',[FillkpiController::class,'verifikasi'])->name('verifikasi');
 });
 
 Route::middleware(['auth','user-access:kaprodi'])->group(function(){

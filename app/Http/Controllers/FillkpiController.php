@@ -49,6 +49,17 @@ class FillkpiController extends Controller
         return view("layout.laporan-kpi",['data' => $data]);
     }
 
+    public function verifikasi(){
+        $idr = Auth::user()->id_role;
+            $idu = Auth::user()->id_vocation;
+            $idk = Kpireq::where("id_role", $idr)
+            ->where("id_vocation", $idu)
+            ->get();
+            // $data =  Kpiquestion::where("id_kpi", $idk)->get();
+            return view("layout.laporan-tendik",['data' => $idk]);
+        return view("layout.verivikasi",['data' => $data]);
+    }
+
     public function store(Request $request){
         $rules = array(
             'nilaikpi' => 'required',
