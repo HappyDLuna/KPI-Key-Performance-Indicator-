@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class kpireq extends Model
 {
@@ -21,6 +22,17 @@ class kpireq extends Model
     }
     public function vocation(){
         return $this->belongsTo(Vocation::class, 'id_vocation');
+    }
+
+    public function kpiscore(): HasManyThrough{
+        return $this->hasManyThrough(
+            Kpiscore::class,
+            Kpiquestion::class,
+            'id_kpi',
+            'id_kpiquestion',
+            'id',
+            'id'
+        );
     }
 
 }

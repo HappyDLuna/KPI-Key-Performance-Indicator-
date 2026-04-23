@@ -8,6 +8,7 @@ use App\Models\Kpiscore;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use App\Models\User;
 
 class FillkpiController extends Controller
 {
@@ -50,14 +51,9 @@ class FillkpiController extends Controller
     }
 
     public function verifikasi(){
-        $idr = Auth::user()->id_role;
-            $idu = Auth::user()->id_vocation;
-            $idk = Kpireq::where("id_role", $idr)
-            ->where("id_vocation", $idu)
-            ->get();
-            // $data =  Kpiquestion::where("id_kpi", $idk)->get();
-            return view("layout.laporan-tendik",['data' => $idk]);
-        return view("layout.verivikasi",['data' => $data]);
+        $data = Kpireq::get();
+        $user = User::all();
+        return view("layout.verifikasi",['data' => $data, 'user' => $user]);
     }
 
     public function store(Request $request){
