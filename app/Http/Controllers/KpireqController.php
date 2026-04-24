@@ -23,7 +23,7 @@ class KpireqController extends Controller
     public function index()
     {
         $data = Kpireq::all();
-        return view("layout/tables-kpi",['data' => $data]);
+        return view("layout.tables-kpi",['data' => $data]);
     }
 
     /**
@@ -33,7 +33,7 @@ class KpireqController extends Controller
     {
         $select1 = Role::all();
         $select2 = Vocation::all();
-        return view("layout/form-kpi",['select1' => $select1, 'select2'=>$select2]);
+        return view("layout.form-kpi",['select1' => $select1, 'select2'=>$select2]);
     }
 
     /**

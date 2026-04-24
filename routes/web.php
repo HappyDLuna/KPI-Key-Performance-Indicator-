@@ -72,7 +72,7 @@ Route::middleware(['auth','user-access:tendik'])->group(function(){
     Route::get('/tendik/laporan',[FillkpiController::class,'laporan'])->name('laporan');
     Route::get('/tendik/laporan-kpi/{id}',[FillkpiController::class,'laporan_kpi'])->name('laporan-kpi');
     Route::get('/tendik/jawabkpi/{id}',[FillkpiController::class,'isikpi'])->name('answer-kpi');
-    Route::post('/tendik/simpankpi',[FillkpiController::class,'store'])->name('masuk-kpi');
+    Route::post('/tendik/simpankpi',[FillkpiController::class,'store'])->name('masuk-data-kpi');
     Route::get('/tendik/ubahkpi/{id}',[FillkpiController::class,'editkpi'])->name('ubah-kpi');
     Route::put('/tendik/updatekpi',[FillkpiController::class,'update'])->name('update-kpi');
     Route::get('/tendik/delete-answer',[FillkpiController::class,'delete'])->name('delete-answer');
@@ -81,6 +81,7 @@ Route::middleware(['auth','user-access:tendik'])->group(function(){
 
 Route::middleware(['auth','user-access:rektor'])->group(function(){
     Route::get('/rektor/verifikasi',[FillkpiController::class,'verifikasi'])->name('verifikasi');
+    Route::get('/rektor/verifikasi-kpi/{id}',[FillkpiController::class,'verifikasi_kpi'])->name('verifikasi-kpi');
 });
 
 Route::middleware(['auth','user-access:kaprodi'])->group(function(){

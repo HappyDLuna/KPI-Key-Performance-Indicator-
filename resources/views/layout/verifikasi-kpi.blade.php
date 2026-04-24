@@ -23,32 +23,33 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Kebutuhan KPI</th>
+                                <th>KPI</th>
                                 <th>Nilai KPI</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th>No</th>
                                 <th>Kebutuhan KPI</th>
-                                <th></th>
+                                <th>Nilai KPI</th>
+                                <th>Aksi</th>
                             </tr>
                         </tfoot>
                         <tbody>
                             @foreach ($data as $d)
                             <tr>
-                                <input type="text" name="idkpireq" value="{{ $d->id_kpi }}" hidden>
-                                <input type="text" name="idkpi[]" value="{{ $d->id }}" hidden>
                                 <td>{{$loop->iteration}}</td>
-                                <td>{{$d->kpi}}</td>
+                                <td>{{$d->kpiquestion->kpi}}</td>
+                                <td>{{$d->skor}}</td>
                                 <td>
-                                    <input type="text" name="nilaikpi[]" class="form-control">
+                                    <button type="submit"> Verifikasi </button>
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
-                    <button type="submit">Isi Kpi</button>
+                    <button type="submit">Verifikasi Semua</button>
                 </form>
                 </div>
             </div>

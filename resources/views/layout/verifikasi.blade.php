@@ -31,11 +31,16 @@
                     </tfoot>
                     <tbody>
                         @foreach ($data as $d)
-                        <tr>
-                            <td>{{$d->name}}</td>
-                            <td>
-                                <a class="btn btn-primary" href="">Cek Jawaban</a>
-                            </td>
+                                <tr>
+                                    <td>@for ($x = 0; $x < count($user); $x++)
+                                        @if ($d->id_user == $user[$x]->id) 
+                                        {{ $user[$x]->name }} 
+                                        @endif
+                                        @endfor
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-primary" href="{{ route('verifikasi-kpi',$d->id_user) }}">Cek Jawaban</a>
+                                    </td>
                         </tr>
                         @endforeach  
                     </tbody>
