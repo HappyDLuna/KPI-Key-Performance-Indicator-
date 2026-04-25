@@ -43,13 +43,13 @@
                                 <td>{{$d->kpiquestion->kpi}}</td>
                                 <td>{{$d->skor}}</td>
                                 <td>
-                                    <button type="submit"> Verifikasi </button>
+                                    <button type="submit" class="btn btn-primary"> Verifikasi </button>
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
-                    <button type="submit">Verifikasi Semua</button>
+                    <button type="submit" class="btn btn-primary">Verifikasi Semua</button>
                 </form>
                 </div>
             </div>

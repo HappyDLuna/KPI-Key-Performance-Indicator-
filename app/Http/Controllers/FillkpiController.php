@@ -58,7 +58,8 @@ class FillkpiController extends Controller
     }
 
     public function verifikasi_kpi($id){
-        return view("layout.verifikasi-kpi",['data' => $data, 'user' => $user]);
+        $data = Kpiscore::with('kpiquestion')->where('id_user',$id)->where('status',0)->get();
+        return view("layout.verifikasi-kpi",['data' => $data]);
     }
 
     public function store(Request $request){
