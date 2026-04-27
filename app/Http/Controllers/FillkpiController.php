@@ -62,6 +62,20 @@ class FillkpiController extends Controller
         return view("layout.verifikasi-kpi",['data' => $data]);
     }
 
+    public function ubah_status(Request $request){
+        for ($x = 0; $x < count($request->kpi); $x++){
+            Kpiscore::updateOrCreate([
+                'id' => $request->kpi[$x]],
+            [
+                'status' => 1,
+        ]);
+        }
+        $idu = Auth::user()->id_vocation;
+        $data = Kpiscore::select('id_user')->where('status',0)->groupBy('id_user')->get();
+        $user = User::all();
+        return view("layout.verifikasi",['data' => $data, 'user' => $user]);
+    }
+
     public function store(Request $request){
         $rules = array(
             'nilaikpi' => 'required',

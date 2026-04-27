@@ -82,6 +82,7 @@ Route::middleware(['auth','user-access:tendik'])->group(function(){
 Route::middleware(['auth','user-access:rektor'])->group(function(){
     Route::get('/rektor/verifikasi',[FillkpiController::class,'verifikasi'])->name('verifikasi');
     Route::get('/rektor/verifikasi-kpi/{id}',[FillkpiController::class,'verifikasi_kpi'])->name('verifikasi-kpi');
+    Route::post('/rektor/verifikasi-kpi-status/',[FillkpiController::class,'ubah_status'])->name('masuk-verifikasi-kpi');
 });
 
 Route::middleware(['auth','user-access:kaprodi'])->group(function(){

@@ -16,7 +16,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <form action="{{ route('masuk-data-kpi') }}" method="post">
+                    <form action="{{ route('masuk-verifikasi-kpi') }}" method="post">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 @csrf
                                 @method('post')
@@ -43,13 +43,13 @@
                                 <td>{{$d->kpiquestion->kpi}}</td>
                                 <td>{{$d->skor}}</td>
                                 <td>
-                                    <button type="submit" class="btn btn-primary"> Verifikasi </button>
+                                    <input type="checkbox" value="{{ $d->id }}" name="kpi[]">
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
-                    <button type="submit" class="btn btn-primary">Verifikasi Semua</button>
+                    <button type="submit" class="btn btn-primary">Verifikasi</button>
                 </form>
                 </div>
             </div>
