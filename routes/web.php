@@ -86,5 +86,7 @@ Route::middleware(['auth','user-access:rektor'])->group(function(){
 });
 
 Route::middleware(['auth','user-access:kaprodi'])->group(function(){
-    
+    Route::get('/kaprodi/verifikasi',[FillkpiController::class,'verifikasi'])->name('verifikasi1');
+    Route::get('/kaprodi/verifikasi-kpi/{id}',[FillkpiController::class,'verifikasi_kpi'])->name('verifikasi-kpi1');
+    Route::post('/kaprodi/verifikasi-kpi-status/',[FillkpiController::class,'ubah_status'])->name('masuk-verifikasi-kpi1');
 });

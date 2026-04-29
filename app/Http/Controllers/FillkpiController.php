@@ -40,7 +40,7 @@ class FillkpiController extends Controller
 
     public function isikpi($id){
         $data =  Kpiquestion::whereDoesntHave('kpiscore', function ($query){
-            $query->where("id_user", Auth::user()->id);
+            $query->where('id_user', Auth::user()->id);
         })->where('id_kpi',$id)->get();
         return view("layout.kpi-fill",['data' => $data]);
     }
@@ -53,6 +53,10 @@ class FillkpiController extends Controller
     public function verifikasi(){
         $idu = Auth::user()->id_vocation;
         $data = Kpiscore::select('id_user')->where('status',0)->groupBy('id_user')->get();
+        // $data = Kpireq::with('kpiscore', function($query){
+        //     $query->select('id_user')->groupBy('id_user');
+        // })->get();
+        dd($data);
         $user = User::all();
         return view("layout.verifikasi",['data' => $data, 'user' => $user]);
     }

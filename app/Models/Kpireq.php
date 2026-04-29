@@ -24,6 +24,10 @@ class kpireq extends Model
         return $this->belongsTo(Vocation::class, 'id_vocation');
     }
 
+    public function kpiquestion(){
+        return $this->hasMany(Kpiquestion::class, 'id_kpi');
+    }
+
     public function kpiscore(): HasManyThrough{
         return $this->hasManyThrough(
             Kpiscore::class,
