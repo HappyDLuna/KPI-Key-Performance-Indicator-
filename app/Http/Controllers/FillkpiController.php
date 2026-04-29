@@ -56,7 +56,6 @@ class FillkpiController extends Controller
         // $data = Kpireq::with('kpiscore', function($query){
         //     $query->select('id_user')->groupBy('id_user');
         // })->get();
-        dd($data);
         $user = User::all();
         return view("layout.verifikasi",['data' => $data, 'user' => $user]);
     }
