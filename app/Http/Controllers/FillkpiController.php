@@ -54,7 +54,7 @@ class FillkpiController extends Controller
         $idu = Auth::user()->id_vocation;
         $data = Kpiscore::select('id_user')->where('status',0)->groupBy('id_user')->get();
         // $data = Kpireq::with('kpiscore', function($query){
-        //     $query->select('id_user')->groupBy('id_user');
+        //     $query->groupBy('id_user');
         // })->get();
         $user = User::all();
         return view("layout.verifikasi",['data' => $data, 'user' => $user]);
