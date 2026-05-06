@@ -42,6 +42,7 @@
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$d->kpiquestion->kpi}}</td>
                                 <td>{{$d->skor}}</td>
+                                <td>{{$d->keterangan}}</td>
                                 <td>
                                     <input type="checkbox" value="{{ $d->id }}" name="kpi[]">
                                 </td>

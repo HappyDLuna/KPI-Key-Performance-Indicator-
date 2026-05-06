@@ -100,7 +100,7 @@ class FillkpiController extends Controller
             'id_kpiquestion' => $request->idkpi[$x],
             'id_user' => Auth::user()->id,
             'skor' => $request->nilaikpi[$x],
-            'keterangan' => '-',
+            'keterangan' => $request->keterangan[$x],
             'status' => 0
         ]);
         }
@@ -136,6 +136,7 @@ class FillkpiController extends Controller
             'id' => $request->id[$x]],
             [
             'skor' => $request->nilaikpi[$x],
+            'keterangan' => $request->keterangan[$x]
         ]);
         }
 

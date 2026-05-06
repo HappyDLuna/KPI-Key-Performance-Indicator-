@@ -25,13 +25,15 @@
                                 <th>No</th>
                                 <th>Kebutuhan KPI</th>
                                 <th>Nilai KPI</th>
+                                <th>Keterangan</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th>No</th>
                                 <th>Kebutuhan KPI</th>
-                                <th></th>
+                                <th>Nilai KPI</th>
+                                <th>Keterangan</th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -44,6 +46,7 @@
                                 <td>
                                     <input type="text" name="nilaikpi[]" class="form-control">
                                 </td>
+                                <td><textarea name="keterangan[]" class="form-control"></textarea></td>
                             </tr>
                             @endforeach
                         </tbody>
