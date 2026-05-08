@@ -114,7 +114,7 @@ class KpiquestionController extends Controller
             'keterangan' => $request->keterangan,
         ]);
 
-        return redirect('/kpi/pertanyaan-kpi/'.$request->id)->with('alert','Pengubahan Pertanyaan KPI berhasil');
+        return redirect('/kpi/pertanyaan-kpi/'.$id)->with('alert','Pengubahan Pertanyaan KPI berhasil');
     }
 
     /**
