@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_kpiquestion');
             $table->unsignedBigInteger('id_user');
             $table->integer('skor');
+            $table->string('bukti');
             $table->string('keterangan');
             $table->integer('status');
             $table->timestamps();

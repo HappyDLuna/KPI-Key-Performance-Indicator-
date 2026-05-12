@@ -70,6 +70,7 @@ class FillkpiController extends Controller
             Kpiscore::updateOrCreate([
                 'id' => $request->kpi[$x]],
             [
+                'skor' => $request->nilaikpi[$x],
                 'status' => 1,
         ]);
         }

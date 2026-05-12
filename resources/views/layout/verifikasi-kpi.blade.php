@@ -39,13 +39,11 @@
                         <tbody>
                             @foreach ($data as $d)
                             <tr>
+                                <input type="text" name="kpi" value="{{ $d->id }}" hidden>
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$d->kpiquestion->kpi}}</td>
-                                <td>{{$d->skor}}</td>
+                                <td><input type="text" name="nilaikpi[]" value="{{$d->skor}}" class="form-control"></td>
                                 <td>{{$d->keterangan}}</td>
-                                <td>
-                                    <input type="checkbox" value="{{ $d->id }}" name="kpi[]">
-                                </td>
                             </tr>
                             @endforeach
                         </tbody>
