@@ -6,8 +6,10 @@ use App\Models\Kpiquestion;
 use App\Models\Kpireq;
 use App\Models\Kpiscore;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 
 class FillkpiController extends Controller
@@ -81,10 +83,23 @@ class FillkpiController extends Controller
     }
 
     public function store(Request $request){
-        $rules = array(
-            'nilaikpi' => 'required',
-            'nilaikpi' => 'max:100'
-        );
+        // dd($request);
+        
+        $rowCount = count($request->input('idkpi', []));
+
+        $rules = [
+            'idkpi' => 'required|array',
+            'idkpi.*' => 'required',
+
+            'nilaikpi' => 'required|array|size:' . $rowCount,
+            'nilaikpi.*' => 'required|numeric|min:0|max:100',
+
+            'keterangan' => 'required|array|size:' . $rowCount,
+            'keterangan.*' => 'required|string|max:1000',
+
+            'bukti' => 'required|array|size:' . $rowCount,
+            'bukti.*' => 'required|image|mimes:jpg,jpeg,png,gif|max:2048',
+];
 
         $messages = array(
             'nilaikpi.required' => 'Nilai Kpi harus Di isi',
@@ -97,14 +112,18 @@ class FillkpiController extends Controller
             ->withErrors($validator);
         }
         for ($x = 0; $x < count($request->idkpi); $x++){
-            Kpiscore::create([
-            'id_kpiquestion' => $request->idkpi[$x],
-            'id_user' => Auth::user()->id,
-            'skor' => $request->nilaikpi[$x],
-            'keterangan' => $request->keterangan[$x],
-            'status' => 0
-        ]);
+            $bukti = $request->file('bukti')[$x];
+            $nama_file[] = time()."_".$bukti->getClientOriginalName();
+            $randomizedname = Str::slug('PRF'.'-'.now()->format('YmdHis'));
+        //     Kpiscore::create([
+        //     'id_kpiquestion' => $request->idkpi[$x],
+        //     'id_user' => Auth::user()->id,
+        //     'skor' => $request->nilaikpi[$x],
+        //     'keterangan' => $request->keterangan[$x],
+        //     'status' => 0
+        // ]);
         }
+        // dd($nama_file);
         
 
         return redirect('/tendik/rekap')->with('alert','Penambahan Jawaban KPI berhasil');

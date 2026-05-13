@@ -16,7 +16,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <form action="{{ route('masuk-data-kpi') }}" method="post">
+                    <form action="{{ route('masuk-data-kpi') }}" method="post" enctype="multipart/form-data">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 @csrf
                                 @method('post')
@@ -25,6 +25,7 @@
                                 <th>No</th>
                                 <th>Kebutuhan KPI</th>
                                 <th>Nilai KPI</th>
+                                <th>Bukti</th>
                                 <th>Keterangan</th>
                             </tr>
                         </thead>
@@ -33,6 +34,7 @@
                                 <th>No</th>
                                 <th>Kebutuhan KPI</th>
                                 <th>Nilai KPI</th>
+                                <th>Bukti</th>
                                 <th>Keterangan</th>
                             </tr>
                         </tfoot>
@@ -40,18 +42,19 @@
                             @foreach ($data as $d)
                             <tr>
                                 <input type="text" name="idkpireq" value="{{ $d->id_kpi }}" hidden>
-                                <input type="text" name="idkpi[]" value="{{ $d->id }}" hidden>
+                                <input type="text" name="idkpi[{{ $loop->index }}]" value="{{ $d->id }}" hidden>
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$d->kpi}}</td>
                                 <td>
-                                    <input type="text" name="nilaikpi[]" class="form-control">
+                                    <input type="text" name="nilaikpi[{{ $loop->index }}]" class="form-control">
                                 </td>
-                                <td><textarea name="keterangan[]" class="form-control"></textarea></td>
+                                <td><input type="file" name="bukti[{{ $loop->index }}]"></td>
+                                <td><textarea name="keterangan[{{ $loop->index }}]" class="form-control"></textarea></td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
-                    <button type="submit">Isi Kpi</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> Isi Kpi</button>
                 </form>
                 </div>
             </div>
