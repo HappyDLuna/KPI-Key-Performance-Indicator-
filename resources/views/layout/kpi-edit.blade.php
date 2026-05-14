@@ -25,6 +25,7 @@
                                 <th>No</th>
                                 <th>Kebutuhan KPI</th>
                                 <th>Nilai KPI</th>
+                                <th>Bukti</th>
                                 <th>Keterangan</th>
                             </tr>
                         </thead>
@@ -33,6 +34,7 @@
                                 <th>No</th>
                                 <th>Kebutuhan KPI</th>
                                 <th>Nilai KPI</th>
+                                <th>Bukti</th>
                                 <th>Keterangan</th>
                             </tr>
                         </tfoot>
@@ -40,13 +42,12 @@
                             @foreach ($data as $d)
                             <tr>
                                 <input type="text" name="idkpireq" value="{{ $d->kpiquestion->id_kpi }}" hidden>
-                                <input type="text" name="id[]" value="{{ $d->id }}" hidden>
+                                <input type="text" name="idkpi[{{ $loop->index }}]" value="{{ $d->id }}" hidden>
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$d->kpiquestion->kpi}}</td>
-                                <td>
-                                    <input type="text" name="nilaikpi[]" class="form-control" value="{{ $d->skor }}">
-                                    <td><textarea name="keterangan[]" class="form-control">{{ $d->keterangan }}</textarea></td>
-                                </td>
+                                <td><input type="text" name="nilaikpi[{{ $loop->index }}]" class="form-control" value="{{ $d->skor }}"></td>
+                                <td><input type="file" name="bukti[{{ $loop->index }}]"></td>
+                                <td><textarea name="keterangan[{{ $loop->index }}]" class="form-control">{{ $d->keterangan }}</textarea></td>
                             </tr>
                             @endforeach
                         </tbody>

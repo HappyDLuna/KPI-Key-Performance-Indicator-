@@ -113,19 +113,20 @@ class FillkpiController extends Controller
         }
         for ($x = 0; $x < count($request->idkpi); $x++){
             $bukti = $request->file('bukti')[$x];
-            $nama_file[] = time()."_".$bukti->getClientOriginalName();
-            $randomizedname = Str::slug('PRF'.'-'.now()->format('YmdHis'));
-        //     Kpiscore::create([
-        //     'id_kpiquestion' => $request->idkpi[$x],
-        //     'id_user' => Auth::user()->id,
-        //     'skor' => $request->nilaikpi[$x],
-        //     'keterangan' => $request->keterangan[$x],
-        //     'status' => 0
-        // ]);
+            // $nama_file[] = time()."_".$bukti->getClientOriginalName();
+            $ext = $bukti->getClientOriginalExtension();
+            $rname = Str::slug('PRF'.'-'.now()->format('YmdHis').'-'.Str::random(6).'-'.($x+1)).'.'.$ext;
+            $folder = 'data_gambar';
+            $bukti->move($folder,$rname);
+            Kpiscore::create([
+                'id_kpiquestion' => $request->idkpi[$x],
+                'id_user' => Auth::user()->id,
+                'skor' => $request->nilaikpi[$x],
+                'bukti' => $rname,
+                'keterangan' => $request->keterangan[$x],
+                'status' => 0
+            ]);
         }
-        // dd($nama_file);
-        
-
         return redirect('/tendik/rekap')->with('alert','Penambahan Jawaban KPI berhasil');
     }
 
@@ -135,10 +136,21 @@ class FillkpiController extends Controller
     }
 
     public function update(Request $request){
-        $rules = array(
-            'nilaikpi' => 'required',
-            'nilaikpi' => 'max:100'
-        );
+        $rowCount = count($request->input('idkpi', []));
+
+        $rules = [
+            'idkpi' => 'required|array',
+            'idkpi.*' => 'required',
+
+            'nilaikpi' => 'required|array|size:' . $rowCount,
+            'nilaikpi.*' => 'required|numeric|min:0|max:100',
+
+            'keterangan' => 'required|array|size:' . $rowCount,
+            'keterangan.*' => 'required|string|max:1000',
+
+            'bukti' => 'required|array|size:' . $rowCount,
+            'bukti.*' => 'required|image|mimes:jpg,jpeg,png,gif|max:2048',
+        ];
 
         $messages = array(
             'nilaikpi.required' => 'Nilai Kpi harus Di isi',
@@ -147,15 +159,21 @@ class FillkpiController extends Controller
 
         $validator = Validator::make($request->all(),$rules,$messages);
         if($validator->fails()){
-            return redirect('/tendik/jawabkpi/'.$id)
+            return redirect('/tendik/ubahkpi/'.$request->idkpireq)
             ->withErrors($validator);
         }
 
-        for ($x = 0; $x < count($request->id); $x++){
+        for ($x = 0; $x < count($request->idkpi); $x++){
+            $bukti = $request->file('bukti')[$x];
+            $ext = $bukti->getClientOriginalExtension();
+            $rname = Str::slug('PRF'.'-'.now()->format('YmdHis').'-'.Str::random(6).'-'.($x+1)).'.'.$ext;
+            $folder = 'data_gambar';
+            $bukti->move($folder,$rname);
             Kpiscore::updateOrCreate([
             'id' => $request->id[$x]],
             [
             'skor' => $request->nilaikpi[$x],
+            'bukti' => $rname,
             'keterangan' => $request->keterangan[$x]
         ]);
         }

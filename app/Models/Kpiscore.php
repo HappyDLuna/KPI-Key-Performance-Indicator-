@@ -13,6 +13,7 @@ class kpiscore extends Model
         'id_kpiquestion',
         'id_user',
         'skor',
+        'bukti',
         'keterangan',
         'status'
     ];
