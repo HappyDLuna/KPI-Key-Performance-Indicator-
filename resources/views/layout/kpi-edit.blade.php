@@ -16,7 +16,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <form action="{{ route('update-kpi') }}" method="post">
+                    <form action="{{ route('update-kpi') }}" method="post" enctype="multipart/form-data">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 @csrf
                                 @method('put')

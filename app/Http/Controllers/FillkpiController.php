@@ -99,7 +99,7 @@ class FillkpiController extends Controller
 
             'bukti' => 'required|array|size:' . $rowCount,
             'bukti.*' => 'required|image|mimes:jpg,jpeg,png,gif|max:2048',
-];
+        ];
 
         $messages = array(
             'nilaikpi.required' => 'Nilai Kpi harus Di isi',
@@ -116,8 +116,7 @@ class FillkpiController extends Controller
             // $nama_file[] = time()."_".$bukti->getClientOriginalName();
             $ext = $bukti->getClientOriginalExtension();
             $rname = Str::slug('PRF'.'-'.now()->format('YmdHis').'-'.Str::random(6).'-'.($x+1)).'.'.$ext;
-            $folder = 'data_gambar';
-            $bukti->move($folder,$rname);
+            $bukti->move(public_path('data_gambar'), $rname);
             Kpiscore::create([
                 'id_kpiquestion' => $request->idkpi[$x],
                 'id_user' => Auth::user()->id,
@@ -167,10 +166,9 @@ class FillkpiController extends Controller
             $bukti = $request->file('bukti')[$x];
             $ext = $bukti->getClientOriginalExtension();
             $rname = Str::slug('PRF'.'-'.now()->format('YmdHis').'-'.Str::random(6).'-'.($x+1)).'.'.$ext;
-            $folder = 'data_gambar';
-            $bukti->move($folder,$rname);
+            $bukti->move(public_path('data_gambar'), $rname);
             Kpiscore::updateOrCreate([
-            'id' => $request->id[$x]],
+            'id' => $request->idkpi[$x]],
             [
             'skor' => $request->nilaikpi[$x],
             'bukti' => $rname,

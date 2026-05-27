@@ -79,14 +79,14 @@ Route::middleware(['auth','user-access:tendik'])->group(function(){
     
 });
 
-Route::middleware(['auth','user-access:rektor'])->group(function(){
-    Route::get('/rektor/verifikasi',[FillkpiController::class,'verifikasi'])->name('verifikasi');
-    Route::get('/rektor/verifikasi-kpi/{id}',[FillkpiController::class,'verifikasi_kpi'])->name('verifikasi-kpi');
-    Route::post('/rektor/verifikasi-kpi-status/',[FillkpiController::class,'ubah_status'])->name('masuk-verifikasi-kpi');
+Route::middleware(['auth','user-access:rektor.kaprodi'])->group(function(){
+    Route::get('/verifikator/verifikasi',[FillkpiController::class,'verifikasi'])->name('verifikasi');
+    Route::get('/verifikator/verifikasi-kpi/{id}',[FillkpiController::class,'verifikasi_kpi'])->name('verifikasi-kpi');
+    Route::post('/verifikator/verifikasi-kpi-status/',[FillkpiController::class,'ubah_status'])->name('masuk-verifikasi-kpi');
 });
 
-Route::middleware(['auth','user-access:kaprodi'])->group(function(){
-    Route::get('/kaprodi/verifikasi',[FillkpiController::class,'verifikasi'])->name('verifikasi1');
-    Route::get('/kaprodi/verifikasi-kpi/{id}',[FillkpiController::class,'verifikasi_kpi'])->name('verifikasi-kpi1');
-    Route::post('/kaprodi/verifikasi-kpi-status/',[FillkpiController::class,'ubah_status'])->name('masuk-verifikasi-kpi1');
-});
+// Route::middleware(['auth','user-access:kaprodi'])->group(function(){
+//     Route::get('/kaprodi/verifikasi',[FillkpiController::class,'verifikasi'])->name('verifikasi1');
+//     Route::get('/kaprodi/verifikasi-kpi/{id}',[FillkpiController::class,'verifikasi_kpi'])->name('verifikasi-kpi1');
+//     Route::post('/kaprodi/verifikasi-kpi-status/',[FillkpiController::class,'ubah_status'])->name('masuk-verifikasi-kpi1');
+// });

@@ -25,7 +25,8 @@
                                 <th>No</th>
                                 <th>KPI</th>
                                 <th>Nilai KPI</th>
-                                <th>Aksi</th>
+                                <th>Bukti</th>
+                                <th>Keterangan</th>
                             </tr>
                         </thead>
                         <tfoot>
@@ -33,16 +34,18 @@
                                 <th>No</th>
                                 <th>Kebutuhan KPI</th>
                                 <th>Nilai KPI</th>
-                                <th>Aksi</th>
+                                <th>Bukti</th>
+                                <th>Keterangan</th>
                             </tr>
                         </tfoot>
                         <tbody>
                             @foreach ($data as $d)
                             <tr>
-                                <input type="text" name="kpi" value="{{ $d->id }}" hidden>
+                                <input type="text" name="kpi[]" value="{{ $d->id }}" hidden>
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$d->kpiquestion->kpi}}</td>
                                 <td><input type="text" name="nilaikpi[]" value="{{$d->skor}}" class="form-control"></td>
+                                <td><a href="{{ asset('data_gambar/'. $d->bukti)}}" target="_blank">{{ $d->bukti }}</a></td>
                                 <td>{{$d->keterangan}}</td>
                             </tr>
                             @endforeach

@@ -24,6 +24,8 @@
                                 <th>No</th>
                                 <th>Kebutuhan KPI</th>
                                 <th>Nilai KPI</th>
+                                <th>Bukti</th>
+                                <th>Keterangan</th>
                                 <th>Status</th>
                             </tr>
                         </thead>
@@ -32,6 +34,8 @@
                                 <th>No</th>
                                 <th>Kebutuhan KPI</th>
                                 <th>Nilai KPI</th>
+                                <th>Bukti</th>
+                                <th>Keterangan</th>
                                 <th>Status</th>
                             </tr>
                         </tfoot>
@@ -41,6 +45,8 @@
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$d->kpiquestion->kpi}}</td>
                                 <td>{{ $d->skor }}</td>
+                                <td><a href="{{ asset('data_gambar/'. $d->bukti)}}" target="_blank">{{ $d->bukti }}</a></td>
+                                <td>{{ $d->keterangan }}</td>
                                 <td>
                                     @if ($d->status == 0)
                                         <span class="badge badge-warning"> Belum Terverifikasi </span>
