@@ -73,6 +73,7 @@ class FillkpiController extends Controller
                 'id' => $request->kpi[$x]],
             [
                 'skor' => $request->nilaikpi[$x],
+                'komentar' => $request->komentar[$x],
                 'status' => 1,
         ]);
         }
@@ -123,6 +124,7 @@ class FillkpiController extends Controller
                 'skor' => $request->nilaikpi[$x],
                 'bukti' => $rname,
                 'keterangan' => $request->keterangan[$x],
+                'komentar' => "-",
                 'status' => 0
             ]);
         }

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('skor');
             $table->string('bukti');
             $table->string('keterangan');
+            $table->string('komentar');
             $table->integer('status');
             $table->timestamps();
 

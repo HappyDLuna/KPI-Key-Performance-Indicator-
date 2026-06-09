@@ -27,6 +27,7 @@
                                 <th>Nilai KPI</th>
                                 <th>Bukti</th>
                                 <th>Keterangan</th>
+                                <th>Komentar</th>
                             </tr>
                         </thead>
                         <tfoot>
@@ -36,6 +37,7 @@
                                 <th>Nilai KPI</th>
                                 <th>Bukti</th>
                                 <th>Keterangan</th>
+                                <th>Komentar</th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -47,6 +49,7 @@
                                 <td><input type="text" name="nilaikpi[]" value="{{$d->skor}}" class="form-control"></td>
                                 <td><a href="{{ asset('data_gambar/'. $d->bukti)}}" target="_blank">{{ $d->bukti }}</a></td>
                                 <td>{{$d->keterangan}}</td>
+                                <td><textarea name="komentar" class="form-control"></textarea></td>
                             </tr>
                             @endforeach
                         </tbody>

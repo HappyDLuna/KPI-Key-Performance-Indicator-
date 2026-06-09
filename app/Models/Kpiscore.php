@@ -15,6 +15,7 @@ class kpiscore extends Model
         'skor',
         'bukti',
         'keterangan',
+        'komentar',
         'status'
     ];
 
