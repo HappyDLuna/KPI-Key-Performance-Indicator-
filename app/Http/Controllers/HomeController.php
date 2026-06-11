@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Kpiscore;
 use App\Models\Kpiquestion;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -26,24 +27,26 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->type == "kaprodi" || Auth::user()->type == "rektor" || Auth::user()->type == "admin"){
-            $data = Kpiscore::where('status',1)->get();
-            $dontexist = Kpiquestion::whereDoesntHave('kpiscore')->get();
-            $pendingdata = Kpiscore::where('status',0)->get();
-            $nocount = $dontexist->count();
-            $pendingcount = $pendingdata->count();
-            $count = $data->count();
-            return view('layout.dashboard-kpi',['count' => $count,'nocount' => $nocount,'pendingcount' => $pendingcount]);
-        } else if (Auth::user()->type == "tendik"){
-            $iduser = User::where('')->get();
-            $data = Kpiscore::where('id_user',1)->where('status',1)->get();
-            $dontexist = Kpiquestion::whereDoesntHave('kpiscore')->get();
-            $pendingdata = Kpiscore::where('status',0)->get();
-            $nocount = $dontexist->count();
-            $pendingcount = $pendingdata->count();
-            $count = $data->count();
-            return view('layout.dashboard-kpi',['count' => $count,'nocount' => $nocount,'pendingcount' => $pendingcount]);
-        }
-        
-    }
+
+    $user = Auth::user();
+
+    if ($user->type == 'kepegawaian' || $user->type == 'rektor' || $user->type == 'kaprodi'){
+        $data = Kpiscore::where('status',1)->get();
+        $dontexist = Kpiquestion::whereDoesntHave('kpiscore')->get();
+        $pendingdata = Kpiscore::where('status',0)->get();
+        $nocount = $dontexist->count();
+        $pendingcount = $pendingdata->count();
+        $count = $data->count();
+        return view('layout.dashboard-kpi',['count' => $count,'nocount' => $nocount,'pendingcount' => $pendingcount]);
+    } else if ($user->type == 'tendik') {
+        $iduser = User::where('')->get();
+        $data = Kpiscore::where('id_user',1)->where('status',1)->get();
+        $dontexist = Kpiquestion::whereDoesntHave('kpiscore')->get();
+        $pendingdata = Kpiscore::where('status',0)->get();
+        $nocount = $dontexist->count();
+        $pendingcount = $pendingdata->count();
+        $count = $data->count();
+        return view('layout.dashboard-kpi',['count' => $count,'nocount' => $nocount,'pendingcount' => $pendingcount]);
+    }   
+    }   
 }
